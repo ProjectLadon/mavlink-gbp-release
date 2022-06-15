@@ -4756,7 +4756,7 @@
       <entry value="5" name="MAV_FTP_ERR_NOSESSIONSAVAILABLE">
         <description>NoSessionsAvailable: All available sessions are already in use</description>
       </entry>
-      <entry value="6" name="MAV_FTP_ERR_EOF">
+      <entry value="6" name="MAV_FTP_ERR_EOFERR">
         <description>EOF: Offset past end of file for ListDirectory and ReadFile commands</description>
       </entry>
       <entry value="7" name="MAV_FTP_ERR_UNKNOWNCOMMAND">
