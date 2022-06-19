@@ -70,7 +70,7 @@ install(FILES ${CMAKE_BINARY_DIR}/config.h DESTINATION include/${PROJECT_NAME} C
 
 # mavlink generation
 set(mavgen_path ${CMAKE_SOURCE_DIR}/pymavlink/tools/mavgen.py)
-set(common_xml_path ${CMAKE_SOURCE_DIR}/message_definitions/v1.0/common.xml)
+set(common_xml_path ${CMAKE_SOURCE_DIR}/message_definitions/v1.0/ladon_robotics.xml)
 macro(generateMavlink_v10 definitions)
     foreach(definitionAbsPath ${definitions})
         get_filename_component(definition ${definitionAbsPath} NAME_WE)

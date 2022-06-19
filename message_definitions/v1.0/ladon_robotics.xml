@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<mavlink>
+
+    <include>development.xml</include>
+    <include>ardupilotmega.xml</include>
+    <!-- <version>9</version> -->
+    <dialect>8</dialect>
+
+    <enums>
+        <!-- Enums are defined here (optional) -->
+        <enum name="SAIL_POS_ID">
+            <description>The position of a wingsail on a boat</description>
+            <entry value="0" name="SAIL_POS_ID_SINGLE">
+                <description>A single sail on the boat</description>
+            </entry>
+            <entry value="20" name="SAIL_POS_ID_FORE">
+                <description>The forward most sail on a boat</description>
+            </entry>
+            <entry value="21" name="SAIL_POS_ID_MAIN">
+                <description>The middle sail on a boat</description>
+            </entry>
+            <entry value="22" name="SAIL_POS_ID_MIZZEN">
+                <description>The aft most sail on a boat</description>
+            </entry>
+            <entry value="1" name="SAIL_POS_ID_1">
+                <description>Wingsail #1</description>
+            </entry>
+            <entry value="2" name="SAIL_POS_ID_2">
+                <description>Wingsail #2</description>
+            </entry>
+            <entry value="3" name="SAIL_POS_ID_3">
+                <description>Wingsail #3</description>
+            </entry>
+            <entry value="4" name="SAIL_POS_ID_4">
+                <description>Wingsail #4</description>
+            </entry>
+            <entry value="5" name="SAIL_POS_ID_5">
+                <description>Wingsail #5</description>
+            </entry>
+            <entry value="6" name="SAIL_POS_ID_6">
+                <description>Wingsail #6</description>
+            </entry>
+            <entry value="7" name="SAIL_POS_ID_7">
+                <description>Wingsail #7</description>
+            </entry>
+            <entry value="8" name="SAIL_POS_ID_8">
+                <description>Wingsail #8</description>
+            </entry>
+            <entry value="255" name="SAIL_POS_ID_NONE">
+                <description>No wingsail defined</description>
+            </entry>
+        </enum>
+        <enum name="SAIL_ANGLE_TYPE">
+            <description>The type of the angle of the sail command/report</description>
+            <entry value="1" name="SAIL_ANGLE_TYPE_AOA">
+                <description>The angle is an angle of attack</description>
+            </entry>
+            <entry value="2" name="SAIL_ANGLE_TYPE_ROT">
+                <description>The angle is a rotation angle</description>
+            </entry>
+        </enum>
+        <enum name="WIND_DATA_TYPE">
+            <description>The type of the wind data from a node</description>
+            <entry value="1" name="WIND_DATA_TYPE_APPARENT">
+                <description>The wind data is relative to the boat</description>
+            </entry>
+            <entry value="2" name="WIND_DATA_TYPE_TRUE">
+                <description>The wind data is relative to the ground</description>
+            </entry>
+            <entry value="0" name="WIND_DATA_TYPE_RAW">
+                <description>The wind is raw</description>
+            </entry>
+            <entry value="255" name="WIND_DATA_TYPE_INVALID">
+                <description>The wind is invalid</description>
+            </entry>
+        </enum>
+    </enums>
+
+    <messages>
+        <!-- Messages are defined here (optional) -->
+        <!-- Ladon Robotics message range: 44000-44999 -->
+        <message id="44000" name="WINGSAIL_ACTUATOR">
+            <description>Commanded/actual position for wingsail actuators</description>
+            <field type="uint8_t" name="target_system">System ID</field>
+            <field type="uint8_t" name="target_component">Component ID</field>
+            <field type="uint8_t" name="target_sail" enum="SAIL_POS_ID">Position of the target sail</field>
+            <field type="uint8_t" name="sail_angle_type" enum="SAIL_ANGLE_TYPE">Type of angle specified</field>
+            <field type="float" name="sail_angle" units="deg" invalid="NAN">Angle of the sail</field>
+            <field type="uint8_t" name="flap_active" display="bitmask">Bitmask of active flap values</field>
+            <field type="float[8]" name="flap_angle">Flap position/command values. Unused fields are set to zero</field>
+        </message>
+        <message id="44001" name="WIND_DATA">
+            <description>Wind information</description>
+            <field type="uint8_t" name="target_system">System ID</field>
+            <field type="uint8_t" name="target_component">Component ID</field>
+            <field type="uint8_t" name="source_sail" enum="SAIL_POS_ID">If the wind instrument is mounted on wingsail, it's defined here</field>
+            <field type="uint8_t" name="wind_type" enum="WIND_DATA_TYPE">Wind data type (apparent, true, or raw)</field>
+            <field type="float" name="speed" units="m/s" invalid="NAN">The speed of the wind, m/s</field>
+            <field type="float" name="direction" units="deg" invalid="NAN">The direction of the wind, degrees clockwise from north</field>
+        </message>
+    </messages>
+
+</mavlink>
