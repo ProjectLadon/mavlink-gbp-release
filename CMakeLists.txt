@@ -78,7 +78,7 @@ macro(generateMavlink_v10 definitions)
         add_custom_command(
             OUTPUT include/v1.0/${definition}/${definition}.h
             COMMAND /usr/bin/env PYTHONPATH="${CMAKE_SOURCE_DIR}:$ENV{PYTHONPATH}"
-                ${Python_EXECUTABLE} ${mavgen_path} --lang=C --wire-protocol=1.0
+                ${Python_EXECUTABLE} ${mavgen_path} --lang=C --wire-protocol=2.0
                 --output=include/v1.0 ${definitionAbsPath}
             DEPENDS ${definitionAbsPath} ${common_xml_path} ${mavgen_path}
             )
