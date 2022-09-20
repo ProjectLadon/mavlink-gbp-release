@@ -13,6 +13,9 @@
             <entry value="0" name="SAIL_POS_ID_SINGLE">
                 <description>A single sail on the boat</description>
             </entry>
+            <entry value="201" name="SAIL_POS_ID_MIXED">
+                <description>Indicates the data is a mix from all of the sails on the vessel</description>
+            </entry>
             <entry value="20" name="SAIL_POS_ID_FORE">
                 <description>The forward most sail on a boat</description>
             </entry>
@@ -87,7 +90,7 @@
             <field type="uint8_t" name="sail_angle_type" enum="SAIL_ANGLE_TYPE">Type of angle specified</field>
             <field type="float" name="sail_angle" units="deg" invalid="NAN">Angle of the sail</field>
             <field type="uint8_t" name="flap_active" display="bitmask">Bitmask of active flap values</field>
-            <field type="float[8]" name="flap_angle">Flap position/command values. Unused fields are set to zero</field>
+            <field type="float[8]" name="flap_angle">Flap position/command values. Unused fields are set to NAN</field>
         </message>
         <message id="44001" name="WIND_DATA">
             <description>Wind information</description>
@@ -98,6 +101,17 @@
             <field type="float" name="speed" units="m/s" invalid="NAN">The speed of the wind, m/s</field>
             <field type="float" name="direction" units="deg" invalid="NAN">The direction of the wind, degrees clockwise from north</field>
         </message>
+        <message id="44002" name="WINGSAIL_FEEDBACK">
+            <description>Wingsail position and other feedback data</description>
+            <field type="uint8_t" name="target_system">System ID</field>
+            <field type="uint8_t" name="target_component">Component ID</field>
+            <field type="uint8_t" name="source_sail" enum="SAIL_POS_ID">The sail providing the feedback</field>
+            <field type="uint8_t" name="sail_angle_type" enum="SAIL_ANGLE_TYPE">Type of angle specified</field>
+            <field type="float" name="sail_angle" units="deg" invalid="NAN">Angle of the sail</field>
+            <field type="uint8_t" name="flap_active" display="bitmask">Bitmask of active flap values</field>
+            <field type="float[8]" name="flap_angle">Flap position values. Unused fields are set to NAN</field>
+        </message>
+
     </messages>
 
 </mavlink>
