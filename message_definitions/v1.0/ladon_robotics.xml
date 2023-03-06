@@ -106,8 +106,8 @@
             <field type="uint8_t" name="target_system">System ID</field>
             <field type="uint8_t" name="target_component">Component ID</field>
             <field type="uint8_t" name="source_sail" enum="SAIL_POS_ID">The sail providing the feedback</field>
-            <field type="uint8_t" name="sail_angle_type" enum="SAIL_ANGLE_TYPE">Type of angle specified</field>
-            <field type="float" name="sail_angle" units="deg" invalid="NAN">Angle of the sail</field>
+            <field type="float" name="sail_angle" units="deg" invalid="NAN">Angle of the sail to the boat</field>
+            <field type="float" name="wind_angle" units="deg" invalid="NAN">Angle of the sail to the wind</field>
             <field type="uint8_t" name="flap_active" display="bitmask">Bitmask of active flap values</field>
             <field type="float[8]" name="flap_angle">Flap position values. Unused fields are set to NAN</field>
         </message>
