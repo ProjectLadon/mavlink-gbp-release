@@ -313,14 +313,7 @@ def generate_field_dissector(outf, msg, field, offset, cmd=None, param=None):
         t.write(outf,
 """
     field_offset = offset + ${foffset}
-    value = padded(field_offset, ${fbytes}):${ftvbfunc}()
-    if (field_offset + ${fbytes} <= limit) then
-        subtree = tree:add_le(f.${fvar}, buffer(field_offset, ${fbytes}), value)
-    elseif (field_offset < limit) then
-        subtree = tree:add_le(f.${fvar}, buffer(field_offset, limit - offset - ${foffset}), value)
-    else
-        subtree = tree:add_le(f.${fvar}, value)
-    end
+    subtree, value = tree:add_le(f.${fvar}, padded(field_offset, ${fbytes}))
 """, {'foffset': offset + i * size, 'fbytes': size, 'ftvbfunc': tvb_func, 'fvar': field_var})
 
         if flag_enum is not None:
@@ -638,11 +631,12 @@ def generate_epilog(outf):
 wtap_encap = DissectorTable.get("wtap_encap")
 wtap_encap:add(wtap.USER0, mavlink_proto)
 
--- bind protocol dissector to port 14550 and 14580
+-- bind protocol dissector to ports: 14550, 14580, 18570
 
 local udp_dissector_table = DissectorTable.get("udp.port")
 udp_dissector_table:add(14550, mavlink_proto)
 udp_dissector_table:add(14580, mavlink_proto)
+udp_dissector_table:add(18570, mavlink_proto)
 """)
 
 def generate(basename, xml):
